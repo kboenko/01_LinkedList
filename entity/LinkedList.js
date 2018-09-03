@@ -1,5 +1,5 @@
-const del = require('../utils/deleteItem');
 const Node = require('../entity/Node');
+const deleteItemsByValue = require('../utils/deleteItemsByValue');
 
 class LinkedList {
 
@@ -37,34 +37,28 @@ class LinkedList {
   deleteByValue(value) {
     let node = this.head;
     let prevNode = null;
-    let nextNode = node.next;
 
     while (node !== null) {
       if (node.value !== value) {
         prevNode = node;
-      } else if (node.value === value) {
+      } else if (node.value === value && prevNode !== null) {
 
         if (node.next !== null) {
-          node.value = node.next.value;
-          node.next = node.next.next;
+          prevNode.next = node.next;
         } else {
+          prevNode.next = null;
           this.tail = prevNode;
           this.tail.next = null;
         }
+        break;
+      } else if (node.value === value && prevNode === null) {
+        node === node.next;
         break;
       }
 
       node = node.next;
 
     }
-  }
-
-  deleteAllByValue(value) {
-    let valArray = del(this.head, value);
-    let list = new LinkedList();
-    valArray.forEach(item => list.addInTail(new Node(item)));
-    this.head = list.head;
-    this.tail = list.tail;
   }
 
   clear() {
@@ -83,6 +77,33 @@ class LinkedList {
       node = node.next
     }
     return length;
+  }
+
+  getValues() {
+    let node = this.head;
+    let values = [];
+
+    while (node !== null) {
+      values.push(node.value);
+      node = node.next;
+    }
+
+    return values;
+  }
+
+  deleteAllByValue (value) {
+    let reducedList = deleteItemsByValue(this.head, value);
+
+    let node = reducedList;
+    let tail = null;
+
+    while (node !== null) {
+      if (node.next === null) {
+        this.tail = node;
+      }
+      node = node.next;
+    }
+    this.head = reducedList;
   }
 
   insertAfter(newNode, nodeNumber) {

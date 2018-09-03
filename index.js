@@ -24,10 +24,11 @@ const getSum = require('./utils/getSum');
       console.log('---------------------------------------------------');
       console.log(linkedList.findByValue(58));
       console.log('---------------------------------------------------');
+      console.log(linkedList.getValues());
       linkedList.deleteByValue(58);
       //linkedList.deleteAllByValue(58);
       console.log('---------------------DelByVal----------------------');
-      console.log(linkedList);
+      console.log(linkedList.getValues());
       console.log('---------------------------------------------------');
       console.log(`Linked List Length: ${linkedList.getLength()}` );
       console.log('---------------------------------------------------');
@@ -57,17 +58,19 @@ const getSum = require('./utils/getSum');
 
       let list3 = new LinkedList();
 
-      list3.addInTail(new Node(1));
+      list3.addInTail(new Node(9));
       list3.addInTail(new Node(2));
       list3.addInTail(new Node(1));
       list3.addInTail(new Node(10));
       list3.addInTail(new Node(1));
       list3.addInTail(new Node(1));
 
+      console.log(list3.getValues());
+
       list3.deleteAllByValue(1);
 
       console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
-      console.log(list3);
+      console.log(list3.getValues());
       console.log(list3.getLength());
       console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
 
